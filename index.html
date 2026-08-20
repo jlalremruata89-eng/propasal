@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Lalpek Hlui 💖</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      touch-action: manipulation;
+    }
+    h1 { color: #d63384; font-size: 1.8rem; padding: 0 20px; }
+    .btn-container { margin-top: 20px; position: relative; width: 100vw; height: 300px; }
+    button {
+      padding: 16px 36px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: all 0.15s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    #yesBtn { background-color: #28a745; color: white; position: relative; z-index: 10; }
+    #noBtn { background-color: #dc3545; color: white; position: absolute; left: 50%; transform: translateX(-50%); top: 100px; }
+  </style>
+</head>
+<body>
+
+  <h1 id="question">Lalpek Hlui, will you be my girlfriend? 💖</h1>
+
+  <div class="btn-container">
+    <button id="yesBtn" onclick="acceptProposal()">YES! 🥰</button>
+    <button id="noBtn" ontouchstart="dodge()" onmouseover="dodge()" onclick="dodge()">No 😜</button>
+  </div>
+
+  <script>
+    let scale = 1;
+    const excuses = [
+      "Error 404: Option Not Found! 😜",
+      "Nice try! 🙈",
+      "You can't catch me! 🏃‍♀️",
+      "Try again! 💖",
+      "Wrong button! 😘",
+      "Nope, tap YES! 🌹"
+    ];
+
+    function dodge() {
+      const noBtn = document.getElementById('noBtn');
+      const yesBtn = document.getElementById('yesBtn');
+
+      const padding = 60;
+      const x = Math.max(padding, Math.floor(Math.random() * (window.innerWidth - 160)));
+      const y = Math.max(padding, Math.floor(Math.random() * (window.innerHeight - 200)));
+
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+      noBtn.style.transform = 'none';
+
+      const randomMsg = excuses[Math.floor(Math.random() * excuses.length)];
+      noBtn.innerText = randomMsg;
+
+      scale += 0.2;
+      yesBtn.style.transform = `scale(${scale})`;
+    }
+
+    function acceptProposal() {
+      document.body.innerHTML = `
+        <h1 style="font-size: 2.2rem; color: #d63384; padding: 20px;">I knew you couldn't resist! Best decision ever! 🥰💖</h1>
+        <p style="font-size: 1.4rem; color: #333;">Our forever starts now! ✨</p>
+      `;
+      confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+    }
+  </script>
+</body>
+</html>
